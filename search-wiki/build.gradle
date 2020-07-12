@@ -22,4 +22,8 @@ test {
     useJUnitPlatform()
 }
 
+run{
+    standardInput = System.in
+}
+
 mainClassName = 'org.example.Main'
