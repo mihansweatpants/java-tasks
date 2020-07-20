@@ -1,7 +1,19 @@
 package org.example;
 
+import org.example.weatherApi.WeatherApi;
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("telegram-weather-bot");
+        ApiContextInitializer.init();
+        TelegramBotsApi botsApi = new TelegramBotsApi();
+
+        try {
+            botsApi.registerBot(new WeatherBot(new WeatherApi()));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }
