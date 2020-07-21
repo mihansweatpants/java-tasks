@@ -18,7 +18,7 @@ public class WeatherApi {
     private final ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     public WeatherApi() {
-        this.apiUriBase = String.format("https://api.openweathermap.org/data/2.5/weather?units=metric&appid=%s",
+        this.apiUriBase = String.format("https://api.openweathermap.org/data/2.5/onecall?units=metric&appid=%s",
                                         System.getenv("OPENWEATHERMAP_API_KEY"));
     }
 
