@@ -13,12 +13,8 @@ public class MainTest {
     @Test
     @DisplayName("Main method throws when receiving incorrect arguments")
     public void testArgs() {
-        var wrongNumberOfArgsException = assertThrows(IllegalArgumentException.class, () -> Main.main(new String[]{"some stuff"}));
-        assertEquals(Main.WRONG_NUM_OF_ARGUMENTS_ERR_MSG, wrongNumberOfArgsException.getMessage());
-
-        var wrongDateFormatException = assertThrows(IllegalArgumentException.class, () ->
-                Main.main(new String[] {"some_file.csv", "2020-01-01"}));
-        assertEquals(Main.WRONG_DATE_FORMAT_ERR_MSG, wrongDateFormatException.getMessage());
+        assertThrows(IllegalArgumentException.class, () -> Main.main(new String[]{"some stuff"}));
+        assertThrows(IllegalArgumentException.class, () -> Main.main(new String[] {"some_file.csv", "2020-01-01"}));
     }
 
     @Test
