@@ -1,11 +1,15 @@
-package org.example.dto;
+package org.example.wiki.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SearchInfoDto {
-    public final Integer total;
+    private final Integer total;
 
     public SearchInfoDto(@JsonProperty("totalhits") Integer total) {
         this.total = total;
+    }
+
+    public Integer getTotal() {
+        return total;
     }
 }
