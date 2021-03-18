@@ -1,19 +1,18 @@
 package org.example;
 
-import org.example.weatherApi.WeatherApi;
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.UpdatesListener;
 
 public class Main {
     public static void main(String[] args) {
-        ApiContextInitializer.init();
-        TelegramBotsApi botsApi = new TelegramBotsApi();
+        TelegramBot telegramBot = new TelegramBot(System.getenv("BOT_TOKEN"));
+        OpenWeatherMapApiClient openWeatherMapApiClient = new OpenWeatherMapApiClient(System.getenv("OPENWEATHERMAP_API_KEY"));
 
-        try {
-            botsApi.registerBot(new WeatherBot(new WeatherApi()));
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+        UpdatesListener updatesListener = new WeatherBotUpdatesListener(
+                new ForecastService(telegramBot, openWeatherMapApiClient),
+                new ForecastSubscriptionService(telegramBot, openWeatherMapApiClient)
+        );
+
+        telegramBot.setUpdatesListener(updatesListener);
     }
 }
